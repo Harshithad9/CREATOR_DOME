@@ -1,15 +1,9 @@
-// controllers/promptController.js
+// routes/promptRoutes.js
+const express = require("express");
+const router = express.Router();
+const verifyFirebaseToken = require("../middleware/authMiddleware");
+const { savePrompt } = require("../controllers/promptController");
 
-exports.savePrompt = (req, res) => {
-  const { promptText, category, generatedPrompt } = req.body;
-  const userId = req.user.uid;
+router.post("/save", verifyFirebaseToken, savePrompt);
 
-  if (!promptText || !category || !generatedPrompt) {
-    return res.status(400).json({ message: "Missing fields." });
-  }
-
-  // For now, simulate DB save with console
-  console.log(`Saving for user ${userId}:`, { promptText, category, generatedPrompt });
-
-  return res.status(201).json({ message: "Prompt saved successfully!" });
-};
+module.exports = router;
