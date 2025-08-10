@@ -13,6 +13,8 @@ app.use(express.json());
 connectDB();
 
 // Routes
+
+
 app.use('/api/prompts', require('./routes/promptRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 
